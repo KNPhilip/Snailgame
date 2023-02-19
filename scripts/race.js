@@ -1,10 +1,19 @@
 //Variables
+let modal = document.querySelector("#modal-container");
+let modalText = document.querySelector("#winnertext");
+let modalImage = document.querySelector("#winnerimg");
+let span = document.querySelector("#close");
 let startButton = document.querySelector("#startbutton")
 let topText = document.querySelector("#top")
 let currentRaceTime = 0;
-let currentTimeRecord;
-let finishLine = 38;
+let currentTimeRecord, finishLine;
 let snails = [];
+if (screen.width > 500){
+    finishLine = 38;
+}
+else{
+    finishLine = 22;
+}
 
 //Classes
 class Snail{
@@ -67,8 +76,13 @@ function validateSnails(){
 
         let snailToEdit = document.getElementById(snails[i].id);
         snailToEdit.style.backgroundImage = "url('" + snails[i].icon + "')";
-        snailToEdit.style.top = snails[i].top + "vh";
         snailToEdit.style.left = snails[i].left + "vw";
+        if (screen.width > 1200){
+            snailToEdit.style.top = snails[i].top + "vh";  
+        }
+        else{
+            snailToEdit.style.top = (snails[i].top * 8) + "px";
+        }
     }
 }
 
@@ -79,14 +93,12 @@ function start(){
 
     for(i = 0; i < snails.length; i++){
         let currentSnail = document.getElementById(snails[i].id);
-        let randomNumber = Math.round((Math.random() * 2) + 5);
-        snails[i].left += (randomNumber / Math.round((Math.random() * 14) + 5));
+        snails[i].left += (Math.round((Math.random() * 2) + 5) / Math.round((Math.random() * 14) + 5));
         currentSnail.style.left = snails[i].left + "vw";
 
         if (snails[i].left >= finishLine){
             snails[i].racesWon += 1;
-            console.log(snails[i].racesWon);
-            setTimeout("gameOver('" + snails[i].name + "')", 1000);
+            setTimeout("gameOver('" + snails[i].name + "', '" + snails[i].icon + "')", 1000);
             break;
         }
         else if (i + 1 == snails.length){
@@ -97,23 +109,35 @@ function start(){
 }
 
 //Ending the game, is executed when a snail reaches the finish line
-function gameOver(fastestSnail){
+function gameOver(fastestSnail, snailImage){
     currentRaceTime = (currentRaceTime * 100) / 1000;
-    if (fastestSnail == undefined){
-        alert("Ræset blev uafgjort! Det tog " + currentRaceTime + " sekunder");
-    }
-    else{
-        alert("Ræset er slut og " + fastestSnail + " vandt! Det tog " + currentRaceTime + " sekunder");
-        if (currentRaceTime < currentTimeRecord || currentTimeRecord == undefined){
-            currentTimeRecord = currentRaceTime;
-            topText.innerText = "Hurtigste tid sat af: " + fastestSnail + " på " + currentRaceTime + " sekunder!";
-        }
-    }
+
+    modalText.innerText = "Ræset er slut og " + fastestSnail + " vandt! Det tog " + currentRaceTime.toFixed(1) + " sekunder";
+    modalImage.src = snailImage;
+    modal.style.display = "block";
     startButton.style.display = "block";
+
+    if (currentRaceTime < currentTimeRecord || currentTimeRecord == undefined){
+        currentTimeRecord = currentRaceTime;
+        topText.innerHTML = "Hurtigste tid sat af " + fastestSnail + " på <br> " + currentRaceTime.toFixed(1) + " sekunder!";
+    }
+
     for(i = 0; i < snails.length; i++){
         let currentSnail = document.getElementById(snails[i].id);
         currentSnail.style.left = "-34vw";
         currentSnail.innerHTML = '<p>' + snails[i].name + '<br>Points: ' + snails[i].racesWon +'</p>';
         snails[i].left = -34;
+    }
+}
+
+//Close winner modal when clicking on the close button
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+//Closes the winner modal when the user clicks anywhere outside it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
     }
 }
