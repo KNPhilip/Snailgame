@@ -10,69 +10,87 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="container-lg align-items-center bg-light">
-    <main class="d-flex flex-column align-items-center m-5 index-main">
+<body class="container-md align-items-center bg-light">
+    <main class="d-flex flex-column align-items-center mt-5 mb-5 index-main">
         <h1>Snegleræs</h1>
         <br /> <br />
         <h2>Hvem skal være med i løbet?</h2>
         <br />
         <form method="GET" action="race.html">
-            <div class="d-flex flex-row">
+            <div class="d-flex flex-column flex-lg-row align-items-center align-items-lg-left">
                 <div>
-                    <h4>Snegl 1:</h4>
-                    <section class="d-flex flex-row align-items-center">
-                        <p class="m-2">Aktiv:</p>
-                        <input type="checkbox" checked="true" disabled />
-                        <p class="m-2">Navn:</p>
-                        <input name="firstSnail" value="Philip" />
+                    <h4 class="text-center">Snegl 1:</h4>
+                    <section class="d-flex flex-column flex-lg-row">
+                        <div class="d-flex flex-row">
+                            <p class="m-2">Aktiv:</p>
+                            <input type="checkbox" checked="true" disabled />
+                        </div>
+                        <div class="d-flex flex-row">
+                            <p class="m-2">Navn:</p>
+                            <input name="firstSnail" value="Philip" />
+                        </div>
                     </section>
                 </div>
-                <img src="img/snegl1.png" />
+                <img class="indeximg" src="img/snegl1.png" />
             </div>
             <br /> <br />
 
-            <div class="d-flex flex-row">
+            <div class="d-flex flex-column flex-lg-row align-items-center align-items-lg-left">
                 <div>
-                    <h4>Snegl 2:</h4>
-                    <section class="d-flex flex-row align-items-center">
-                        <p class="m-2">Aktiv:</p>
-                        <input type="checkbox" checked="true" disabled />
-                        <p class="m-2">Navn:</p>
-                        <input name="secondSnail" value="Kenneth" />
+                    <h4 class="text-center">Snegl 2:</h4>
+                    <section class="d-flex flex-column flex-lg-row">
+                        <div class="d-flex flex-row">
+                            <p class="m-2">Aktiv:</p>
+                            <input type="checkbox" checked="true" disabled />
+                        </div>
+                        <div class="d-flex flex-row">
+                            <p class="m-2">Navn:</p>
+                            <input name="secondSnail" value="Kenneth" />
+                        </div>
                     </section>
                 </div>
-                <img src="img/snegl2.png" />
+                <img class="indeximg" src="img/snegl2.png" />
             </div>
             <br /> <br />
 
-            <div class="d-flex flex-row">
+            <div class="d-flex flex-column flex-lg-row align-items-center align-items-lg-left">
                 <div>
-                    <h4>Snegl 3:</h4>
-                    <section class="d-flex flex-row align-items-center">
-                        <p class="m-2">Aktiv:</p>
-                        <input id="thirdCheckBox" type="checkbox" />
-                        <p class="m-2">Navn:</p>
-                        <input id="thirdSnail" name="thirdSnail" value="Jonas" disabled />
+                    <h4 class="text-center">Snegl 3:</h4>
+                    <section class="d-flex flex-column flex-lg-row">
+                        <div class="d-flex flex-row">
+                            <p class="m-2">Aktiv:</p>
+                            <input id="thirdCheckBox" type="checkbox" />
+                        </div>
+                        <div class="d-flex flex-row">
+                            <p class="m-2">Navn:</p>
+                            <input id="thirdSnail" name="thirdSnail" value="Jonas" disabled />
+                        </div>
                     </section>
                 </div>
-                <img src="img/snegl3.png" />
+                <img class="indeximg" src="img/snegl3.png" />
             </div>
             <br /> <br />
 
-            <div class="d-flex flex-row">
+            <div class="d-flex flex-column flex-lg-row align-items-center align-items-lg-left">
                 <div>
-                    <h4>Snegl 4:</h4>
-                    <section class="d-flex flex-row align-items-center">
-                        <p class="m-2">Aktiv:</p>
-                        <input id="fourthCheckBox" type="checkbox" disabled />
-                        <p class="m-2">Navn:</p>
-                        <input id="fourthSnail" name="fourthSnail" value="Jesper" disabled />
+                    <h4 class="text-center"> Snegl 4:</h4>
+                    <section class="d-flex flex-column flex-lg-row">
+                        <div class="d-flex flex-row">
+                            <p class="m-2">Aktiv:</p>
+                            <input id="fourthCheckBox" type="checkbox" disabled />
+                        </div>
+                        <div class="d-flex flex-row">
+                            <p class="m-2">Navn:</p>
+                            <input id="fourthSnail" name="fourthSnail" value="Jesper" disabled />
+                        </div>
                     </section>
                 </div>
-                <img src="img/snegl4.png" />
+                <img class="indeximg" src="img/snegl4.png" />
             </div>
             <br /> <br />
-            <input class="mb-5" type="submit" value="Start løbet!" />
+            <div class="text-center text-lg-left">
+                <input class="button mb-5 align-items-center" type="submit" value="Start løbet" />
+            </div>
         </form>
     </main>
 
