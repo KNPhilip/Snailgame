@@ -3,9 +3,11 @@ let modal = document.querySelector("#modal-container");
 let modalText = document.querySelector("#winnertext");
 let modalImage = document.querySelector("#winnerimg");
 let span = document.querySelector("#close");
-let startButton = document.querySelector("#startbutton")
-let topText = document.querySelector("#top")
+let startButton = document.querySelector("#startbutton");
+let buttons = document.querySelector(".buttons");
+let topText = document.querySelector("#top");
 let currentRaceTime = 0;
+let currentTopRaces = 0;
 let currentTimeRecord, finishLine;
 let snails = [];
 if (screen.width > 500){
@@ -44,8 +46,8 @@ function validateSnails(){
         alert("Navngiv mindst 2 af de første snegle (Noget ordenligt..)");
     }
     else{
-        let firstSnail = new Snail("firstSnail", getParameterByName("firstSnail"), "img/snegl1.png", 0, -20, -34);
-        let secondSnail = new Snail("secondSnail", getParameterByName("secondSnail"), "img/snegl2.png", 0, -7, -34);
+        let firstSnail = new Snail("firstSnail", getParameterByName("firstSnail"), "img/snail1", 0, -20, -34);
+        let secondSnail = new Snail("secondSnail", getParameterByName("secondSnail"), "img/snail2", 0, -7, -34);
         snails.push(firstSnail);
         snails.push(secondSnail);
         if (getParameterByName("thirdSnail") != ""){
@@ -54,7 +56,7 @@ function validateSnails(){
                 alert("Navngiv den tredje snegl (Noget ordenligt..)");
             }
             else{
-                let thirdSnail = new Snail("thirdSnail", getParameterByName("thirdSnail"), "img/snegl3.png", 0, 6, -34);
+                let thirdSnail = new Snail("thirdSnail", getParameterByName("thirdSnail"), "img/snail3", 0, 6, -34);
                 snails.push(thirdSnail);
                 if (getParameterByName("fourthSnail") != ""){
                     if (!getParameterByName("fourthSnail").match(/^[A-Za-z]+$/)){
@@ -62,7 +64,7 @@ function validateSnails(){
                         alert("Navngiv den fjerde snegl (Noget ordenligt..)");
                     }
                     else{
-                        let fourthSnail = new Snail("fourthSnail", getParameterByName("fourthSnail"), "img/snegl4.png", 0, 19, -34);
+                        let fourthSnail = new Snail("fourthSnail", getParameterByName("fourthSnail"), "img/snail4", 0, 19, -34);
                         snails.push(fourthSnail);
                     }
                 }
@@ -75,7 +77,7 @@ function validateSnails(){
         document.querySelector("#raceway").innerHTML += '<div id="' + snails[i].id + '" class="snail-container"><p>' + snails[i].name + '<br>Points: ' + snails[i].racesWon +'</p></div>';
 
         let snailToEdit = document.getElementById(snails[i].id);
-        snailToEdit.style.backgroundImage = "url('" + snails[i].icon + "')";
+        snailToEdit.style.backgroundImage = "url('" + snails[i].icon + ".png')";
         snailToEdit.style.left = snails[i].left + "vw";
         if (screen.width > 1200){
             snailToEdit.style.top = snails[i].top + "vh";  
@@ -88,7 +90,7 @@ function validateSnails(){
 
 //Starting the race
 function start(){
-    startButton.style.display = "none";
+    buttons.style.display = "none";
     startButton.innerText = "OMKAMP";
 
     for(i = 0; i < snails.length; i++){
@@ -98,7 +100,7 @@ function start(){
 
         if (snails[i].left >= finishLine){
             snails[i].racesWon += 1;
-            setTimeout("gameOver('" + snails[i].name + "', '" + snails[i].icon + "')", 1000);
+            setTimeout("gameOver('" + snails[i].name + "', '" + snails[i].icon + "winner.png')", 1000);
             break;
         }
         else if (i + 1 == snails.length){
@@ -115,7 +117,7 @@ function gameOver(fastestSnail, snailImage){
     modalText.innerText = "Ræset er slut og " + fastestSnail + " vandt! Det tog " + currentRaceTime.toFixed(1) + " sekunder";
     modalImage.src = snailImage;
     modal.style.display = "block";
-    startButton.style.display = "block";
+    buttons.style.display = "block";
 
     if (currentRaceTime < currentTimeRecord || currentTimeRecord == undefined){
         currentTimeRecord = currentRaceTime;
@@ -127,6 +129,16 @@ function gameOver(fastestSnail, snailImage){
         currentSnail.style.left = "-34vw";
         currentSnail.innerHTML = '<p>' + snails[i].name + '<br>Points: ' + snails[i].racesWon +'</p>';
         snails[i].left = -34;
+        if (snails[i].name == fastestSnail && snails[i].racesWon > currentTopRaces){
+            currentTopRaces += 1;
+            currentSnail.style.backgroundImage = "url('" + snails[i].icon + "crown.png')";
+        }
+    }
+    for(i = 0; i < snails.length; i++){
+        let currentSnail = document.getElementById(snails[i].id);
+        if (snails[i].racesWon != currentTopRaces){
+            currentSnail.style.backgroundImage = "url('" + snails[i].icon + ".png')";
+        }
     }
 }
 
