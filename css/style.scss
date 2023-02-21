@@ -111,8 +111,15 @@ body
     background-repeat: no-repeat;
 }
 
+.buttons{
+    position: absolute;
+    top: 8vh;
+    left: 10vw;
+}
+
 .startbutton
 {
+    margin:10px;
     width: 150px;
     height: 50px;
     font-size: 30px;
@@ -124,9 +131,6 @@ body
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     line-height: 50px;
     transition: 0.2s;
-    position: absolute;
-    top: 8vh;
-    left: 10vw;
     cursor: pointer;
 }
 
